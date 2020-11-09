@@ -12,6 +12,10 @@ if [ "${COMPRESSED}" = "true" ]; then
 else
     echo "uploading files to S3 [${FILE_NAME}]"
     DATE=`date "+%Y-%m-%d"`
-    aws --endpoint-url ${AWS_ENDPOINT_URL} s3 cp ${FILE_NAME} ${S3_BUCKET_URL}/${DATE}
+    if [ "${DELETE}" = "true" ]; then
+        aws --endpoint-url ${AWS_ENDPOINT_URL} s3 sync --delete /data ${S3_BUCKET_URL}/${DATE}
+    else
+        aws --endpoint-url ${AWS_ENDPOINT_URL} s3 sync /data ${S3_BUCKET_URL}/${DATE}
+    fi
 fi
 
