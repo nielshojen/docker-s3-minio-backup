@@ -21,7 +21,7 @@ fi
 
 if [ "${RETENTION_DAYS}" ]; then
     echo "We're cleaning up files older than ${RETENTION_DAYS} day(s)"
-    $olderThanSecs=$( expr ${RETENTION_DAYS} \* 86400 )
+    olderThanSecs=$( expr ${RETENTION_DAYS} \* 86400 )
     aws --endpoint-url ${AWS_ENDPOINT_URL} s3 ls ${S3_BUCKET_URL} | while read -r line;
     do
       createDate=$(echo $line|awk {'print $1" "$2'})
