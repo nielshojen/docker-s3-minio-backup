@@ -10,6 +10,8 @@ RUN \
 	pip3 install awscli && \
 	apk --purge -v del py-pip && \
 	rm /var/cache/apk/* && \
+	wget -P /usr/bin https://dl.min.io/client/mc/release/linux-amd64/mc && \
+	chmod +x /usr/bin/mc && \
 	chmod +x /entrypoint.sh /dobackup.sh
 
 
